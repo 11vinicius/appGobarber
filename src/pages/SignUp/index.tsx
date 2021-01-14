@@ -59,10 +59,14 @@ const SignUp: React.FC = () =>{
             await schema.validate(data, {
               abortEarly: false,
             });
-            const response = await api.post('/users', data);
-            console.log(response)
+            
+            await api.post('/users', data);
+            
+            Alert.alert('Cadasto realizado com sucesso',
+                'Você já pode fazer login na aplicação.'
+            );
 
-    
+            navigation.goBack();
           } catch (err) {
             if (err instanceof Yup.ValidationError) {
               const errors = getValidationErrors(err);
@@ -76,7 +80,7 @@ const SignUp: React.FC = () =>{
             );
           }
         },
-        [],
+        [navigation],
       );
 
     return (
